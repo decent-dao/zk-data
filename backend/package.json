@@ -1,0 +1,31 @@
+{
+  "name": "lumen-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "runQuery": "ts-node query/runQuery.ts",
+    "build": "prisma generate",
+    "down": "docker-compose down",
+    "migrate:dev": "pnpm exec prisma migrate dev",
+    "migrate:prod": "prisma migrate deploy",
+    "prepare": "prisma generate && cp -n .env.example .env || true",
+    "start": "pnpm down && docker-compose up -d && pnpm migrate:dev",
+    "studio": "prisma studio"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@flipsidecrypto/sdk": "^2.0.0",
+    "@personaelabs/spartan-ecdsa": "^2.1.4",
+    "typescript": "4.8.4",
+    "@prisma/client": "4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.0",
+    "ts-node": "10.9.1",
+    "prisma": "4.5.0",
+    "dotenv": "^16.0.3"
+  }
+}
