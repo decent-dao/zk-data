@@ -6,26 +6,27 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
-model TreeNode {
-  address   String
-  balance    Int
-  path      String[]
-  indices   String[]
-  root      String
-  createdAt DateTime  @default(now())
+model Leaf {
+  address     String   @map("_id")
+  usdValue    Int
+  merkleProof String[]
+  createdAt   DateTime @default(now())
 
-  @@unique([ address, root])
+  @@id([address])
 }
 
-model Tree {
-  root        String
-  createdAt   DateTime  @default(now())
+model Group {
+  merkleRoot     String   @map("_id")
+  name           String
+  threshold      Int
+  erc20Addresses String[]
+  createdAt      DateTime @default(now())
 
-  @@unique([ root])
+  @@id([merkleRoot])
 }
 
 enum HashScheme {
